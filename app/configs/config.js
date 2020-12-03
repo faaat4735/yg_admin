@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
   _shuabuURL = 'http://shuabu.shyonggui.com:8003'
 } else if (process.env.NODE_ENV === 'qa') {
   _baseURL = 'http://test.shyonggui.com:8001'
-  _adminUrl = 'http://test.shyonggui.com:8001'
+  _adminUrl = 'http://test.shyonggui.com:8003'
   _shuabuURL = 'http://test.shyonggui.com:8003'
 }
 
