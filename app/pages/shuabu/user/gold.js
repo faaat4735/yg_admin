@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import TableList from '@tableList';
 import {
-  zouGold,
+  shuabuGold,
 } from '@apis/manage';
 
 const FormItem = Form.Item
@@ -42,7 +42,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouGold({ ...this.state.searchKey, id: this.props.params.id }, (res) => {
+    shuabuGold({ ...this.state.searchKey, id: this.props.params.id }, (res) => {
       this.setState({
         listResult: res.data,
       });
@@ -68,13 +68,13 @@ export default class app extends Component {
     return [
       {
         title: '金币金额',
-        dataIndex: 'value',
-        key: 'value',
+        dataIndex: 'amount',
+        key: 'amount',
       },
       {
         title: '金币来源',
-        dataIndex: 'gSource',
-        key: 'gSource',
+        dataIndex: 'name',
+        key: 'name',
       },
       {
         title: '明细时间',

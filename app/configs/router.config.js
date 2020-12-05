@@ -9,7 +9,7 @@ import * as shuabu from '@pages/shuabu' // 刷步多多
 export default () => (
   <Router history={browserHistory}>
     <Route path="/" component={base.app} onEnter={isLogin}>
-      <IndexRoute component={shuabu.report} />
+      <IndexRoute component={shuabu.user} />
       {/* 走路多多 */}
       <Route path="/shuabu-index" component={shuabu.report} />
       <Route path="/shuabu-list" component={shuabu.user} />

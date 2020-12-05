@@ -5,8 +5,8 @@ import {
 import TableList from '@tableList';
 import Drawer from '@components/draw/draw'
 import {
-  zouVersionAd,
-  zouVersionAdDetail,
+  shuabuVersionAd,
+  shuabuVersionAdDetail,
 } from '@apis/manage';
 
 const FormItem = Form.Item
@@ -48,7 +48,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouVersionAd({ ...this.state.searchKey }, (res) => {
+    shuabuVersionAd({ ...this.state.searchKey }, (res) => {
       this.setState({
         listResult: res.data,
       });
@@ -57,13 +57,13 @@ export default class app extends Component {
   }
 
   add() {
-    this.setState({ detail: {}, showDetail: true});
+    this.setState({ detail: {}, showDetail: true });
   }
 
   handleSubmit() {
     this.props.form.validateFields((error, value) => {
       if (error) { return false; }
-      zouVersionAdDetail({ ...value, action: 'add' }, () => {
+      shuabuVersionAdDetail({ ...value, action: 'add' }, () => {
         message.success('操作成功');
         // 新增成功
         let curpage = this.state.searchKey.pageNo;
@@ -87,7 +87,7 @@ export default class app extends Component {
   }
 
   handleChange(id, name) {
-    zouVersionAdDetail({ version_id: id, app_name: name, action: 'change' }, () => {
+    shuabuVersionAdDetail({ version_id: id, app_name: name, action: 'change' }, () => {
       message.success('操作成功');
       this.getData();
     }, (res) => {

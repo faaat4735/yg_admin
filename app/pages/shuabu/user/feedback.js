@@ -4,9 +4,9 @@ import {
 } from 'antd';
 import TableList from '@tableList';
 import {
-  zouFeedback,
+  shuabuFeedback,
 } from '@apis/manage';
-import { zouOss } from '@config';
+import { shuabuOss } from '@config';
 
 const { Content } = Layout;
 
@@ -35,7 +35,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouFeedback({ ...this.state.searchKey, id: this.props.params.id }, (res) => {
+    shuabuFeedback({ ...this.state.searchKey, id: this.props.params.id }, (res) => {
       this.setState({
         listResult: res.data,
       });
@@ -65,21 +65,6 @@ export default class app extends Component {
         key: 'user_id',
       },
       {
-        title: '手机品牌',
-        dataIndex: 'brand',
-        key: 'brand',
-      },
-      {
-        title: '手机型号',
-        dataIndex: 'model',
-        key: 'model',
-      },
-      {
-        title: '手机号',
-        dataIndex: 'phone_number',
-        key: 'phone_number',
-      },
-      {
         title: '反馈内容',
         dataIndex: 'content',
         key: 'content',
@@ -93,19 +78,19 @@ export default class app extends Component {
         title: '反馈图片1',
         dataIndex: 'image_1',
         key: 'image_1',
-        render: text => (text ? <img className="auto_img" src={`${zouOss}/${text}`} /> : ''),
+        render: text => (text ? <img className="auto_img" src={`${shuabuOss}/${text}`} /> : ''),
       },
       {
         title: '反馈图片2',
         dataIndex: 'image_2',
         key: 'image_2',
-        render: text => (text ? <img className="auto_img" src={`${zouOss}/${text}`} /> : ''),
+        render: text => (text ? <img className="auto_img" src={`${shuabuOss}/${text}`} /> : ''),
       },
       {
         title: '反馈图片3',
         dataIndex: 'image_3',
         key: 'image_3',
-        render: text => (text ? <img className="auto_img" src={`${zouOss}/${text}`} /> : ''),
+        render: text => (text ? <img className="auto_img" src={`${shuabuOss}/${text}`} /> : ''),
       },
       {
         title: '发生时间',

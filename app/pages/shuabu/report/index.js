@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import TableList from '@tableList';
 import {
-  zouReport,
+  shuabuReport,
 } from '@apis/manage';
 
 const { Content } = Layout;
@@ -34,7 +34,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouReport({ ...this.state.searchKey, id: this.props.params.id }, (res) => {
+    shuabuReport({ ...this.state.searchKey, id: this.props.params.id }, (res) => {
       this.setState({
         listResult: res.data,
       });

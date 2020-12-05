@@ -6,8 +6,8 @@ import {
 } from 'antd';
 import TableList from '@tableList';
 import {
-  zouActivity,
-  zouActivityDetail,
+  shuabuActivity,
+  shuabuActivityDetail,
 } from '@apis/manage';
 import Detail from './modal/detail';
 
@@ -55,7 +55,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouActivity({ ...this.state.searchKey }, (res) => {
+    shuabuActivity({ ...this.state.searchKey }, (res) => {
       this.setState({
         listResult: res.data,
       });
@@ -65,7 +65,7 @@ export default class app extends Component {
 
   // 点击详情
   handleInfo = (id) => {
-    zouActivityDetail({ activity_id: id }, (res) => {
+    shuabuActivityDetail({ activity_id: id }, (res) => {
       this.setState({
         detailResult: res.data,
         showDetail: true,

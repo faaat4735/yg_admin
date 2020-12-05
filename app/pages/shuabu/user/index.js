@@ -6,10 +6,10 @@ import TableList from '@tableList';
 import { regExpConfig } from '@reg'
 import Drawer from '@components/draw/draw'
 import {
-  zouUserList,
-  zouUserDetail,
-  zouChangeUserGold,
-  zouChangeUserStatus,
+  shuabuUserList,
+  shuabuUserDetail,
+  shuabuChangeUserGold,
+  shuabuChangeUserStatus,
 } from '@apis/manage';
 import { browserHistory } from 'react-router';
 
@@ -48,7 +48,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouUserList({ ...this.state.searchKey }, (res) => {
+    shuabuUserList({ ...this.state.searchKey }, (res) => {
       this.setState({
         listResult: res.data,
       });
@@ -57,7 +57,7 @@ export default class app extends Component {
   }
 
   handleInfo(id) {
-    zouUserDetail({ id: id }, (res) => {
+    shuabuUserDetail({ id: id }, (res) => {
       this.setState({
         detail: res.data,
         showDetail: true,
@@ -72,7 +72,7 @@ export default class app extends Component {
   handleChange() {
     this.props.form.validateFields((error, value) => {
       if (error) { return false; }
-      zouChangeUserGold({ ...value, id: this.state.changeUserId }, () => {
+      shuabuChangeUserGold({ ...value, id: this.state.changeUserId }, () => {
         message.success('操作成功');
         this.setState({
           changeUserId: 0,
@@ -107,7 +107,7 @@ export default class app extends Component {
   };
 
   handleStatus(id) {
-    zouChangeUserStatus({ user_id: id }, () => {
+    shuabuChangeUserStatus({ user_id: id }, () => {
       message.success('操作成功');
       this.getData();
     }, (res) => {
@@ -147,26 +147,15 @@ export default class app extends Component {
         key: 'app_name',
       },
       {
-        title: '用户手机号',
-        dataIndex: 'phone_number',
-        key: 'phone_number',
-        render: text => (text === '0' ? '' : text),
-      },
-      {
         title: '金币总数',
-        dataIndex: 'totalGold',
-        key: 'totalGold',
-        render: (text, record) => (<a onClick={() => browserHistory.push(`/zou-gold/${record.user_id}`)}>{text}</a>),
-      },
-      {
-        title: '冻结金币数',
-        dataIndex: 'bolckedGold',
-        key: 'bolckedGold',
+        dataIndex: 'total',
+        key: 'total',
+        render: (text, record) => (<a onClick={() => browserHistory.push(`/shuabu-gold/${record.user_id}`)}>{text}</a>),
       },
       {
         title: '当前金币数',
-        dataIndex: 'currentGold',
-        key: 'current_gold',
+        dataIndex: 'current',
+        key: 'current',
       },
       {
         title: '用户状态',
@@ -183,24 +172,6 @@ export default class app extends Component {
         title: '创建时间',
         dataIndex: 'create_time',
         key: 'create_time',
-      },
-      {
-        title: '操作',
-        key: 'operate',
-        render: (text, record) => (
-          <span>
-            <span>
-              <a onClick={() => this.handleInfo(record.user_id)}>详情</a>
-            </span>
-            <span>
-              <a onClick={() => this.handleChangeGold(record.user_id)}>修改金币</a>
-            </span>
-            <br />
-            <Popconfirm title={`确认${record.user_status === '1' ? '冻结' : '解冻'}用户`} onConfirm={() => this.handleStatus(record.user_id)}>
-              <a>{record.user_status === '1' ? '冻结' : '解冻'}用户</a>
-            </Popconfirm>
-          </span>
-        ),
       },
     ];
   }

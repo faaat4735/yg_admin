@@ -151,30 +151,27 @@ export default class Drawer extends Component {
       drawerSizeClass,
     } = this.state
 
-    ReactDOM.render(
-      <div className="drawer-wrap">
-        <div className={`${maskTrasformClass} ant-modal-mask`} onClick={() => this.removeDrawer()} />
-        <div className={`${drawTrasformClass} draw ${drawerSizeClass}`}>
-          <div className="ant-modal">
-            <div className="ant-modal-content">
-              <button className="ant-modal-close">
-                <span className="ant-modal-close-x" onClick={() => this.removeDrawer()} />
-              </button>
-              <div className="ant-modal-header">
-                <div className="ant-modal-title">{title}</div>
-              </div>
-              <AntModalBody context={this.context}>
-                {this.props.children}
-              </AntModalBody>
-              <div className="ant-modal-footer">
-                {footer}
-              </div>
+    ReactDOM.render(<div className="drawer-wrap">
+      <div className={`${maskTrasformClass} ant-modal-mask`} onClick={() => this.removeDrawer()} />
+      <div className={`${drawTrasformClass} draw ${drawerSizeClass}`}>
+        <div className="ant-modal">
+          <div className="ant-modal-content">
+            <button className="ant-modal-close">
+              <span className="ant-modal-close-x" onClick={() => this.removeDrawer()} />
+            </button>
+            <div className="ant-modal-header">
+              <div className="ant-modal-title">{title}</div>
+            </div>
+            <AntModalBody context={this.context}>
+              {this.props.children}
+            </AntModalBody>
+            <div className="ant-modal-footer">
+              {footer}
             </div>
           </div>
         </div>
-      </div>,
-
-    )
+      </div>
+    </div>)
   }
 
   render() {

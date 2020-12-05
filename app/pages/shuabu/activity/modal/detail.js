@@ -4,7 +4,7 @@ import { Button, Form, Input, message, Select } from 'antd'
 import { browserHistory } from 'react-router'
 import Drawer from '@components/draw/draw'
 import {
-  zouActivityDetailUpdate,
+  shuabuActivityDetailUpdate,
 } from '@apis/manage'
 
 const FormItem = Form.Item
@@ -33,7 +33,7 @@ export default class Index extends Component {
         return;
       }
       this.setState({ loading: true }, () => {
-        zouActivityDetailUpdate({ ...values, id: this.props.currPeopleId, action: this.props.type }, (res) => {
+        shuabuActivityDetailUpdate({ ...values, id: this.props.currPeopleId, action: this.props.type }, (res) => {
           message.success('Operation success')
           this.state.loading = false
           this.props.handleOk()
@@ -96,7 +96,7 @@ export default class Index extends Component {
               <Button
                 type="primary"
                 style={{ marginRight: '10px' }}
-                onClick={() => browserHistory.push(`/zou-config/${values.activity_type}`)}
+                onClick={() => browserHistory.push(`/shuabu-config/${values.activity_type}`)}
               >
                 {' '}
                       规则详情

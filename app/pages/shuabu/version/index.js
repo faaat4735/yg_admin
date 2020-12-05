@@ -5,10 +5,10 @@ import {
 import TableList from '@tableList';
 import Drawer from '@components/draw/draw'
 import {
-  zouVersion,
-  zouVersionDetail,
+  shuabuVersion,
+  shuabuVersionDetail,
 } from '@apis/manage';
-import { zouUrl, zouOss } from '@config';
+import { shuabuUrl, shuabuOss } from '@config';
 
 const FormItem = Form.Item
 
@@ -50,7 +50,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouVersion({ ...this.state.searchKey }, (res) => {
+    shuabuVersion({ ...this.state.searchKey }, (res) => {
       this.setState({
         listResult: res.data,
       });
@@ -59,7 +59,7 @@ export default class app extends Component {
   }
 
   handleInfo(id) {
-    zouVersionDetail({ id: id }, (res) => {
+    shuabuVersionDetail({ id: id }, (res) => {
       this.setState({
         detail: res.data,
         showDetail: true,
@@ -75,7 +75,7 @@ export default class app extends Component {
   handleSubmit() {
     this.props.form.validateFields((error, value) => {
       if (error) { return false; }
-      zouVersionDetail({ ...value, id: this.state.detailId, action: 'edit' }, () => {
+      shuabuVersionDetail({ ...value, id: this.state.detailId, action: 'edit' }, () => {
         message.success('操作成功');
         // 新增成功
         let curpage = this.state.searchKey.pageNo;
@@ -113,7 +113,7 @@ export default class app extends Component {
   };
 
   deleteButton = (id) => {
-    zouVersionDetail({ id: id, action: 'delete' }, () => {
+    shuabuVersionDetail({ id: id, action: 'delete' }, () => {
       message.success('删除成功')
       this.getData();
     })
@@ -142,7 +142,7 @@ export default class app extends Component {
         title: 'apk地址',
         dataIndex: 'version_url',
         key: 'version_url',
-        render: text => <a href={`${zouOss}${text}`} target="__blank">下载</a>,
+        render: text => <a href={`${shuabuOss}${text}`} target="__blank">下载</a>,
       },
       {
         title: '需要更新的版本号',
@@ -192,7 +192,7 @@ export default class app extends Component {
     const uploadApp = {
       accept: '.apk',
       name: 'file',
-      action: `${zouUrl}/admin-base/upload`,
+      action: `${shuabuUrl}/admin-base/upload`,
       onChange(info) {
         console.log(info);
         if (info.file.status !== 'uploading') {

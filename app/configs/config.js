@@ -24,6 +24,6 @@ export const path = ''
 export const timeout = '15000' // 接口超时限制(ms)
 export const baseURL = _baseURL
 export const adminUrl = _adminUrl
-export const shuabuURL = _shuabuURL
+export const shuabuUrl = _shuabuURL
 // 刷步多多oss
 export const shuabuOss = 'https://oss.shyonggui.com/'

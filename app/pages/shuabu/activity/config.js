@@ -5,8 +5,8 @@ import {
 import TableList from '@tableList';
 import Drawer from '@components/draw/draw'
 import {
-  zouConfig,
-  zouConfigDetail,
+  shuabuConfig,
+  shuabuConfigDetail,
 } from '@apis/manage';
 
 const FormItem = Form.Item
@@ -50,7 +50,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouConfig({ ...this.state.searchKey, type: this.props.params.type }, (res) => {
+    shuabuConfig({ ...this.state.searchKey, type: this.props.params.type }, (res) => {
       this.setState({
         listResult: res.data,
       });
@@ -60,7 +60,7 @@ export default class app extends Component {
 
   handleInfo(id) {
     console.log(this)
-    zouConfigDetail({ id: id }, (res) => {
+    shuabuConfigDetail({ id: id }, (res) => {
       this.setState({
         detail: res.data,
         showDetail: true,
@@ -77,7 +77,7 @@ export default class app extends Component {
     console.log(this)
     this.props.form.validateFields((error, value) => {
       if (error) { return false; }
-      zouConfigDetail({ ...value, id: this.state.detailId, action: 'edit', type: this.props.params.type }, () => {
+      shuabuConfigDetail({ ...value, id: this.state.detailId, action: 'edit', type: this.props.params.type }, () => {
         message.success('操作成功');
         // 新增成功
         let curpage = this.state.searchKey.pageNo;

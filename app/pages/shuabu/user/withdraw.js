@@ -5,8 +5,8 @@ import {
 import TableList from '@tableList';
 import Drawer from '@components/draw/draw'
 import {
-  zouWithdraw,
-  zouWithdrawAction,
+  shuabuWithdraw,
+  shuabuWithdrawAction,
 } from '@apis/manage';
 import { browserHistory } from 'react-router';
 
@@ -22,7 +22,6 @@ export default class app extends Component {
     super(props);
     this.state = {
       searchKey: {
-        method: '',
         status: '',
         userId: '',
         pageSize: 10,
@@ -33,7 +32,6 @@ export default class app extends Component {
       showReason: false,
       withdraw_id: 0,
       statusSelect: [{ key: 'pending', value: '未审核' }, { key: 'success', value: '审核通过' }, { key: 'failure', value: '审核未通过' }],
-      methodSelect: [{ key: 'alipay', value: '支付宝' }, { key: 'wechat', value: '微信' }],
     };
   }
 
@@ -46,7 +44,7 @@ export default class app extends Component {
 
   // 获取活动列表数据
   getData(callback) {
-    zouWithdraw({ ...this.state.searchKey }, (res) => {
+    shuabuWithdraw({ ...this.state.searchKey }, (res) => {
       this.setState({
         listResult: res.data,
       });
@@ -55,7 +53,7 @@ export default class app extends Component {
   }
 
   handleSuccess(id) {
-    zouWithdrawAction({ withdraw_id: id, action: 'success' }, (res) => {
+    shuabuWithdrawAction({ withdraw_id: id, action: 'success' }, (res) => {
       this.setState({}, () => {
         this.getData();
       });
@@ -69,7 +67,7 @@ export default class app extends Component {
   handleFailed() {
     this.props.form.validateFields((error, value) => {
       if (error) { return false; }
-      zouWithdrawAction({ ...value, withdraw_id: this.state.withdraw_id, action: 'failed' }, (res) => {
+      shuabuWithdrawAction({ ...value, withdraw_id: this.state.withdraw_id, action: 'failed' }, (res) => {
         this.setState({
           showReason: false,
           withdraw_id: 0,
@@ -84,14 +82,12 @@ export default class app extends Component {
   handleSearch = (e) => {
     e.preventDefault();
     const status = this.props.form.getFieldValue('status');
-    const method = this.props.form.getFieldValue('method');
     const userId = this.props.form.getFieldValue('user_id');
     this.setState(
       {
         searchKey: {
           ...this.state.searchKey,
           status: status,
-          method: method,
           userId: userId,
           pageNo: 1,
         },
@@ -134,40 +130,9 @@ export default class app extends Component {
         key: 'withdraw_gold',
       },
       {
-        title: '提现渠道',
-        dataIndex: 'withdraw_method',
-        key: 'withdraw_method',
-      },
-      {
-        title: '提现账号',
-        dataIndex: 'account',
-        key: 'account',
-        render: (text, record) => (record.withdraw_method === 'alipay' ? record.alipay_account : record.wechat_openid),
-      },
-      {
-        title: '提现名称',
-        dataIndex: 'alipay_name',
-        key: 'alipay_name',
-      },
-      {
         title: '提现状态',
         dataIndex: 'withdraw_status',
         key: 'withdraw_status',
-      },
-      {
-        title: '用户手机号',
-        dataIndex: 'phone_number',
-        key: 'phone_number',
-      },
-      {
-        title: '用户手机品牌',
-        dataIndex: 'brand',
-        key: 'brand',
-      },
-      {
-        title: '用户手机型号',
-        dataIndex: 'model',
-        key: 'model',
       },
       {
         title: '用户历史提现金额（元）',
@@ -190,11 +155,6 @@ export default class app extends Component {
         key: 'create_time',
       },
       {
-        title: '友盟分值',
-        dataIndex: 'umeng_score',
-        key: 'umeng_score',
-      },
-      {
         title: '备注',
         dataIndex: 'withdraw_remark',
         key: 'withdraw_remark',
@@ -204,7 +164,7 @@ export default class app extends Component {
         key: 'operate',
         render: (text, record) => (
           <span>
-            <a onClick={() => browserHistory.push(`/zou-gold/${record.user_id}`)}>金币明细</a>
+            <a onClick={() => browserHistory.push(`/shuabu-gold/${record.user_id}`)}>金币明细</a>
             <br />
             {record.withdraw_status === 'pending' ?
               (<span>
@@ -227,7 +187,6 @@ export default class app extends Component {
     const {
       listResult,
       statusSelect,
-      methodSelect
     } = this.state;
     // for detail
     const { getFieldDecorator } = this.props.form
@@ -250,11 +209,6 @@ export default class app extends Component {
                     <FormItem labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} label="提现状态" style={{ width: '200px' }}>
                       {getFieldDecorator('status')(<Select placeholder="All" size="large" allowClear >
                         {statusSelect.map(item => <Option value={item.key.toString()} key={item.key.toString()} selected>{item.key}</Option>)}
-                      </Select>)}
-                    </FormItem>
-                    <FormItem labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} label="提现渠道" style={{ width: '200px' }}>
-                      {getFieldDecorator('method')(<Select placeholder="All" size="large" allowClear >
-                        {methodSelect.map(item => <Option value={item.key.toString()} key={item.key.toString()} selected>{item.key}</Option>)}
                       </Select>)}
                     </FormItem>
                     <Button type="primary" htmlType="submit">

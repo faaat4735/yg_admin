@@ -157,19 +157,17 @@ export default class LeftNav extends Component {
     </Menu.Item>
   )
 
-  renderSubMenu = (item) => {
-    return (<Menu.SubMenu
-      key={`sub${item.id}`}
-      title={
-        <span>
-          {item.resIcon && <i className={`qqbicon qqbicon-${item.resIcon}`} title={item.resName} />}
-          <span className="nav-text">{item.resName}</span>
-        </span>
-      }
-    >
-      {item.children.map(child => ((!child.children || child.children.length === 0) ? this.renderMenuItem(child) : this.renderSubMenu(child)))}
-    </Menu.SubMenu>)
-  };
+  renderSubMenu = item => (<Menu.SubMenu
+    key={`sub${item.id}`}
+    title={
+      <span>
+        {item.resIcon && <i className={`qqbicon qqbicon-${item.resIcon}`} title={item.resName} />}
+        <span className="nav-text">{item.resName}</span>
+      </span>
+    }
+  >
+    {item.children.map(child => ((!child.children || child.children.length === 0) ? this.renderMenuItem(child) : this.renderSubMenu(child)))}
+  </Menu.SubMenu>);
 
   // 左侧菜单高亮的控制
   leftMenuHighLight = () => {
