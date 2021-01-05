@@ -131,13 +131,13 @@ export default class app extends Component {
       },
       {
         title: '提现账号',
-        dataIndex: 'withdraw_status',
-        key: 'withdraw_status',
+        dataIndex: 'withdraw_account',
+        key: 'withdraw_account',
       },
       {
         title: '提现名称',
-        dataIndex: 'withdraw_status',
-        key: 'withdraw_status',
+        dataIndex: 'withdraw_name',
+        key: 'withdraw_name',
       },
       {
         title: '用户历史提现金额（元）',
