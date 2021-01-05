@@ -125,12 +125,17 @@ export default class app extends Component {
         key: 'withdraw_amount',
       },
       {
-        title: '提现金币数',
-        dataIndex: 'withdraw_gold',
-        key: 'withdraw_gold',
+        title: '提现状态',
+        dataIndex: 'withdraw_status',
+        key: 'withdraw_status',
       },
       {
-        title: '提现状态',
+        title: '提现账号',
+        dataIndex: 'withdraw_status',
+        key: 'withdraw_status',
+      },
+      {
+        title: '提现名称',
         dataIndex: 'withdraw_status',
         key: 'withdraw_status',
       },

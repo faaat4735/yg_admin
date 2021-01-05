@@ -143,8 +143,8 @@ export default class app extends Component {
       },
       {
         title: '用户来源',
-        dataIndex: 'app_name',
-        key: 'app_name',
+        dataIndex: 'user_source',
+        key: 'user_source',
       },
       {
         title: '金币总数',
